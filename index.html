@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zextra — Bo'g'im va Suyak Sog'lig'i</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --primary: #1a6b3a;
+    --primary-light: #2d9158;
+    --accent: #c8a84b;
+    --accent-light: #e8c96a;
+    --text: #1a1a2e;
+    --text-light: #5a5a72;
+    --bg: #f8f6f0;
+    --white: #ffffff;
+    --radius: 16px;
+    --shadow: 0 8px 32px rgba(26,107,58,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(248,246,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,168,75,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 1px;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--primary); }
+
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+
+  .nav-cta {
+    background: var(--primary) !important;
+    color: var(--white) !important;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--primary-light) !important;
+    transform: translateY(-1px);
+  }
+
+  /* ===== HERO ===== */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 48px 80px;
+    gap: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,107,58,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,168,75,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,168,75,0.12);
+    border: 1px solid rgba(200,168,75,0.3);
+    color: #a07820;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 50px;
+    margin-bottom: 28px;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-badge i { font-size: 12px; }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--primary);
+    position: relative;
+  }
+
+  .hero-title em::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .hero-desc {
+    font-size: 17px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 480px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--primary);
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(26,107,58,0.25);
+    animation: pulse-green 2.5s infinite;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(26,107,58,0.35);
+    animation: none;
+  }
+
+  @keyframes pulse-green {
+    0%, 100% { box-shadow: 0 4px 20px rgba(26,107,58,0.25); }
+    50% { box-shadow: 0 4px 28px rgba(26,107,58,0.45); }
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--primary);
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--primary);
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(26,107,58,0.12);
+  }
+
+  .stat-item { text-align: left; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* Hero right — visual */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-card {
+    background: var(--white);
+    border-radius: 28px;
+    padding: 48px 40px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(200,168,75,0.15);
+    max-width: 360px;
+    width: 100%;
+  }
+
+  .product-icon {
+    width: 110px;
+    height: 110px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 48px;
+    box-shadow: 0 8px 32px rgba(26,107,58,0.25);
+  }
+
+  .hero-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .hero-card p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .benefit-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .pill {
+    background: rgba(26,107,58,0.07);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+    border: 1px solid rgba(26,107,58,0.15);
+  }
+
+  .floating-badge {
+    position: absolute;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    border: 1px solid rgba(200,168,75,0.2);
+    z-index: 3;
+  }
+
+  .fb-top { top: -20px; right: -30px; color: var(--primary); }
+  .fb-bottom { bottom: -20px; left: -30px; color: #e86c3a; }
+
+  /* ===== ABOUT / BENEFITS ===== */
+  #about {
+    padding: 100px 48px;
+    background: var(--white);
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--accent);
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 60px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .about-text { }
+
+  .benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 24px;
+    background: var(--bg);
+    border-radius: var(--radius);
+    border: 1px solid rgba(26,107,58,0.06);
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  .benefit-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .benefit-item:hover {
+    border-color: rgba(26,107,58,0.2);
+    box-shadow: var(--shadow);
+    transform: translateX(4px);
+  }
+
+  .benefit-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 20px;
+  }
+
+  .benefit-content h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .benefit-content p {
+    font-size: 14px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* About right — visual blocks */
+  .about-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .about-card {
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    border: 1px solid rgba(26,107,58,0.08);
+    text-align: center;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .about-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .about-card:hover {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    transform: translateY(-4px);
+  }
+
+  .about-card-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .about-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .about-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  .about-card.tall {
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* ===== FORM ===== */
+  #form {
+    padding: 100px 48px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #form::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+  }
+
+  .form-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .form-left { }
+
+  .form-box {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 48px 44px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(200,168,75,0.15);
+  }
+
+  .form-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .form-box p {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e8e4dc;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--bg);
+    transition: all 0.2s;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--primary);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(26,107,58,0.08);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .input-error {
+    border-color: #ef4444 !important;
+    background: #fff5f5 !important;
+    box-shadow: 0 0 0 4px rgba(239,68,68,0.08) !important;
+    animation: shake 0.3s ease;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  .err-msg {
+    display: block;
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 6px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26,107,58,0.3);
+  }
+
+  .submit-btn:active { transform: translateY(0); }
+
+  .submit-btn.loading { opacity: 0.7; pointer-events: none; }
+
+  /* Success */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .success-msg.show { display: block; }
+
+  .success-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: white;
+    animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes pop {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+
+  .success-msg h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .success-msg p {
+    font-size: 15px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* Form right info */
+  .form-info { }
+
+  .form-info-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .form-info-desc {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid rgba(26,107,58,0.08);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .contact-item:hover {
+    border-color: var(--primary);
+    transform: translateX(4px);
+    box-shadow: 0 4px 16px rgba(26,107,58,0.10);
+  }
+
+  .contact-item-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--white);
+  }
+
+  .ci-green { background: var(--primary); }
+  .ci-blue { background: #0088cc; }
+  .ci-gold { background: var(--accent); }
+
+  .contact-item-text span {
+    display: block;
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .contact-item-text strong {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 32px 48px;
+    font-size: 14px;
+  }
+
+  footer strong { color: var(--accent); }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { gap: 16px; }
+
+    #hero {
+      grid-template-columns: 1fr;
+      padding: 100px 24px 60px;
+      text-align: center;
+    }
+
+    .hero-desc { margin: 0 auto 32px; }
+    .hero-btns { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .hero-visual { display: none; }
+
+    #about { padding: 72px 24px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-visual { display: none; }
+
+    #form { padding: 72px 24px; }
+    .form-wrap { grid-template-columns: 1fr; gap: 40px; }
+    .form-left { order: 1; }
+    .form-box { padding: 32px 24px; }
+    .form-row { grid-template-columns: 1fr; }
+
+    .floating-badge { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero-stats { gap: 20px; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Zextra</div>
+  <div class="nav-links">
+    <a href="#about">Mahsulot haqida</a>
+    <a href="#form" class="nav-cta">Buyurtma berish</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <i class="fas fa-leaf"></i>
+      100% Tabiiy Preparat
+    </div>
+    <h1 class="hero-title">
+      Grija, bo'g'im og'rig'iga<br>
+      <em>tabiiy yechim</em>
+    </h1>
+    <p class="hero-desc">
+      Zextra — bo'g'im, tog'ay va suyak sog'lig'ini tiklash va mustahkamlash uchun yaratilgan tabiiy preparat. Og'riqsiz, faol hayot sizni kutmoqda.
+    </p>
+    <div class="hero-btns">
+      <a href="#form" class="btn-primary">
+        <i class="fas fa-shopping-bag"></i>
+        Buyurtma berish
+      </a>
+      <a href="tel:555004656" class="btn-secondary">
+        <i class="fas fa-phone"></i>
+        Qo'ng'iroq qilish
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">5000+</div>
+        <div class="stat-label">Mamnun mijoz</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">30</div>
+        <div class="stat-label">Kun ichida natija</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Tabiiy tarkib</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="floating-badge fb-top">
+      <i class="fas fa-check-circle" style="color:var(--primary)"></i>
+      Operatsiyasiz davolanish
+    </div>
+    <div class="hero-card">
+      <div class="product-icon">🌿</div>
+      <h3>Zextra</h3>
+      <p>Bo'g'im va suyak sog'lig'i uchun maxsus ishlab chiqilgan tabiiy formula</p>
+      <div class="benefit-pills">
+        <span class="pill">Bo'g'im</span>
+        <span class="pill">Tog'ay</span>
+        <span class="pill">Suyak</span>
+        <span class="pill">Yallig'lanish</span>
+      </div>
+    </div>
+    <div class="floating-badge fb-bottom">
+      <i class="fas fa-star" style="color:#f59e0b"></i>
+      4.9 / 5 reyting
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT / BENEFITS ===== -->
+<section id="about">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="reveal">
+      <div class="section-tag">Mahsulot haqida</div>
+      <h2 class="section-title">Zextra nima va<br>nima uchun kerak?</h2>
+      <p class="section-desc">
+        Zextra — bo'g'im og'rig'lari, tog'ay yemirilishi va suyak zichligi kamayishi kabi muammolarga qarshi tabiiy tarzda kurashuvchi maxsus preparat. Operatsiyasiz, yon ta'sirsiz.
+      </p>
+    </div>
+
+    <div class="about-grid">
+      <div class="benefits-list">
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-shield-halved"></i></div>
+          <div class="benefit-content">
+            <h4>Og'riqni kamaytiradi</h4>
+            <p>Bo'g'im og'rig'larini tabiiy yo'l bilan bartaraf etadi. Ko'pchilik foydalanuvchilar 2–3 hafta ichida sezilarli yengillik his qiladi.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-bone"></i></div>
+          <div class="benefit-content">
+            <h4>Tog'ayni tiklaydi</h4>
+            <p>Yemirilgan tog'ay to'qimalarini regeneratsiya qilishga yordam beradi va bo'g'imlar harakatchanligini oshiradi.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-fire-flame-curved"></i></div>
+          <div class="benefit-content">
+            <h4>Yallig'lanishga qarshi</h4>
+            <p>Tabiiy anti-inflamator tarkibi yallig'lanish jarayonini to'xtatib, shishni kamaytiradi.</p>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><i class="fas fa-leaf"></i></div>
+          <div class="benefit-content">
+            <h4>100% tabiiy, yon ta'sirsiz</h4>
+            <p>Kimyoviy moddalar yo'q. Faqat tabiat ne'matlari asosida tayyorlangan, buyrak va jigarga zararsiz.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-visual">
+        <div class="about-card tall">
+          <span class="about-card-icon">🦴</span>
+          <h4>Suyak mustahkamligini oshiradi</h4>
+          <p>Kaltsiy va D vitamini singdirilishini yaxshilab, suyak zichligini saqlaydi</p>
+        </div>
+        <div class="about-card">
+          <span class="about-card-icon">⚡</span>
+          <h4>Tez ta'sir</h4>
+          <p>Birinchi natijalar 2 haftada</p>
+        </div>
+        <div class="about-card">
+          <span class="about-card-icon">🏃</span>
+          <h4>Faol hayot</h4>
+          <p>Har kuni erkin harakat qiling</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORM ===== -->
+<section id="form">
+  <div class="form-wrap">
+    <div class="form-left">
+      <div class="form-box">
+        <div id="formContent">
+          <h3>Buyurtma & Konsultatsiya</h3>
+          <p>Ma'lumotlaringizni qoldiring — mutaxassisimiz siz bilan bog'lanadi va buyurtmangizni rasmiylashtiradi.</p>
+
+          <div class="form-group">
+            <label>Ism Familiya</label>
+            <input type="text" id="fname" placeholder="Masalan: Aziz Karimov">
+          </div>
+
+          <div class="form-group">
+            <label>Telefon raqam</label>
+            <input type="tel" id="fphone" placeholder="+998 __ ___ __ __">
+          </div>
+
+          <div class="form-group">
+            <label>Shahar / Tuman</label>
+            <input type="text" id="fcity" placeholder="Masalan: Namangan viloyati, Chust tumani">
+          </div>
+
+          <div class="form-group">
+            <label>Nima muammo bilan qiynalyapsiz?</label>
+            <select id="fproblem">
+              <option value="">Tanlang</option>
+              <option value="grija">Grija</option>
+              <option value="bel">Bel og'rig'i</option>
+              <option value="suyak">Suyak yemirilishidan qiynalaman</option>
+              <option value="bogim">Bo'g'im og'rig'i</option>
+              <option value="boshqa">Boshqa</option>
+            </select>
+          </div>
+
+          <button class="submit-btn" onclick="submitForm(this)">
+            <i class="fas fa-paper-plane"></i>
+            Yuborish
+          </button>
+        </div>
+
+        <div class="success-msg" id="successMsg">
+          <div class="success-icon"><i class="fas fa-check"></i></div>
+          <h4>Rahmat!</h4>
+          <p>Ma'lumotlaringiz qabul qilindi.<br>Mutaxassisimiz <strong>15 daqiqa ichida</strong> siz bilan bog'lanadi.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-info reveal">
+      <div class="section-tag">Bog'lanish</div>
+      <h2 class="form-info-title">Biz bilan<br>bog'laning</h2>
+      <p class="form-info-desc">
+        Savol bormi? Qo'ng'iroq qiling yoki Telegram orqali yozing — mutaxassisimiz bepul maslahat beradi.
+      </p>
+
+      <div class="contact-items">
+        <a href="tel:555004656" class="contact-item">
+          <div class="contact-item-icon ci-green">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="contact-item-text">
+            <span>Telefon</span>
+            <strong>555 00 46 56</strong>
+          </div>
+        </a>
+
+        <a href="https://t.me/zextrasinolife" target="_blank" class="contact-item">
+          <div class="contact-item-icon ci-blue">
+            <i class="fab fa-telegram"></i>
+          </div>
+          <div class="contact-item-text">
+            <span>Telegram</span>
+            <strong>@zextrasinolife</strong>
+          </div>
+        </a>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <strong>Zextra</strong> — Bo'g'im va suyak sog'lig'i uchun tabiiy preparat</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .benefit-item, .about-card').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Stagger benefit items
+  document.querySelectorAll('.benefit-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 100}ms`;
+  });
+
+  document.querySelectorAll('.about-card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 120}ms`;
+  });
+
+  // Form submit
+  // Error handling
+  function showError(id, msg) {
+    const el = document.getElementById(id);
+    el.classList.add('input-error');
+    let err = el.parentElement.querySelector('.err-msg');
+    if (!err) {
+      err = document.createElement('span');
+      err.className = 'err-msg';
+      el.parentElement.appendChild(err);
+    }
+    err.textContent = '⚠ ' + msg;
+    el.focus();
+  }
+
+  function clearError(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.remove('input-error');
+      const err = el.parentElement.querySelector('.err-msg');
+      if (err) err.textContent = '';
+    }
+  }
+
+  ['fname','fphone','fcity','fproblem'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', () => clearError(id));
+    if (el) el.addEventListener('change', () => clearError(id));
+  });
+
+  async function submitForm(btn) {
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const city = document.getElementById('fcity').value.trim();
+    const problem = document.getElementById('fproblem').value;
+
+    if (!name || name.length < 2) { showError('fname', "Ism familiyangizni kiriting"); return; }
+    if (!phone || phone.length < 9) { showError('fphone', "Telefon raqamingizni kiriting"); return; }
+    if (!city) { showError('fcity', "Shahar/tumaningizni kiriting"); return; }
+    if (!problem) { showError('fproblem', "Muammoni tanlang"); return; }
+
+    btn.classList.add('loading');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
+
+    const TELEGRAM_TOKEN = "8735137212:AAHpun4b37tIezu87JSms0sFH-x0KUVPQw8";
+    const CHAT_ID = "-1003957602601";
+    const SHEETS_URL = "YOUR_GOOGLE_SCRIPT_URL";
+
+    // Targetolog aniqla
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetologMap = {
+      timur: "Timur",
+      umar: "Umar",
+      "abbos-alimardon": "Abbos (Alimardon)",
+      "abbos-abduazim": "Abbos (Abduazim)",
+      eldor: "Eldor"
+    };
+    const tParam = urlParams.get('t');
+    const targetolog = targetologMap[tParam] || "Noma'lum";
+
+    const problemMap = {
+      grija: "Grija",
+      bel: "Bel og'rig'i",
+      suyak: "Suyak yemirilishidan qiynalaman",
+      bogim: "Bo'g'im og'rig'i",
+      boshqa: "Boshqa"
+    };
+
+    const text = `🔔 <b>Zextra Landing 2</b>\n\n👤 Ism: ${name}\n📞 Tel: ${phone}\n📍 Shahar/Tuman: ${city}\n🩺 Muammo: ${problemMap[problem] || problem}\n🎯 Targetolog: ${targetolog}\n⏰ Vaqt: ${new Date().toLocaleString('uz-UZ')}`;
+
+    const promises = [];
+
+    promises.push(
+      fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' })
+      })
+    );
+
+    if (SHEETS_URL !== "YOUR_GOOGLE_SCRIPT_URL") {
+      promises.push(
+        fetch(SHEETS_URL, {
+          method: 'POST',
+          body: JSON.stringify({ name, phone, message: `${city} | ${problemMap[problem]}`, targetolog })
+        })
+      );
+    }
+
+    try { if (promises.length > 0) await Promise.all(promises); } catch (e) { console.log(e); }
+
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+  }
+</script>
+</body>
+</html>
